@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	
+	<!-- The title tag is what search engines and browsers use for your page title. -->
+	<title>New England Railroad Maps of the 1880s</title>
+</meta 
+    name='viewport' 
+    content='initial-scale=1,maximum-scale=1,user-scalable=no'
+    />
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""
+/>
+
+	<!-- Define the styles for our page elements -->
+	<style>
+		body {
+			margin: 6;
+            padding: 0;
+            background: rgb(226,206,173);
+            font-family: 'cormorant garamond', serif;
+            font-weight: 300;
+            color: #100f10;
+            font-size: 1em;
+		}
+
+		section {
+			width: 95%; 
+            margin: 10px auto;
+		}
+
+		h1 {
+			font-family: 'Copperplate Gothic Light', serif;
+            font-weight: 500;
+            color: #5e3c58;
+            font-size: 2.2em;
+            font-style: medium;
+            /* The em unit. 3x the current size */
+            letter-spacing: .01em;
+            margin: 0 0 12px 0;
+		}
+
+		h2 {
+			font-family: 'Copperplate Gothic Light', serif;
+            font-size: 1.9em;
+            font-weight: 300;
+            color: #2e4045;
+            letter-spacing: .05em;
+            font-style: regular;
+            margin: 0 0 10px 0;
+		}
+
+		h3 {
+			font-family: 'Copperplate Gothic Light', serif;
+            font-weight: 300;
+            color: #2e4045;
+            font-size: 1.6em;
+            letter-spacing: .05em;
+            font-style: regular;
+            margin: 0 0 10px 0;
+		}
+
+		p {
+			font-family: 'Cormorant Garamond';
+			font-size: 1.5em;
+			line-height: 1.2em;
+		}
+
+		.p2 {
+			font-size: 1.2 em;
+			line-height: 1.1em;
+			font-style: italic
+		}
+
+		.p3 {
+			font-size: 2em;
+			line-height: 1.6em;
+			font-weight: bold
+		}
+
+		a {
+            color: #15397f;
+            text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+			color: black;
+		}
+
+		ul {
+			padding-left: 20px;
+		}
+
+		li {
+			margin: 10px 0
+		}
+
+		/*#map {
+			width: 80%;
+			margin: 6px auto;
+            border: 2px solid #92A497;
+		}*/
+
+		.max-image-width {
+			width: 100%;
+		}
+
+		.linkbox {
+			margin: 3px 0 20px 0;
+			display: block;
+			font-weight: 300;
+		}
+
+		hr {
+			border: 0px;
+			border-bottom: 2px solid #92A497;
+			padding-top: 10px;
+		}
+
+		#iiif-map {
+	        width: 80%;
+			height: 540px;
+			margin: auto;
+			border: 2px solid #92A497;
+		}
+        #iiif-map2 {
+	        width: 80%;
+			height: 540px;
+			margin: auto;
+			border: 2px solid #92A497;
+		}
+
+		.first-column {
+			float: left;
+			width: 45%;
+			padding-right: 5px;
+		}
+
+		.column {
+			float: right;
+			width: 50%;
+		}
+
+		/* Clear floats after the columns */
+
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+        
+        /*#current-view {
+        position: relative;
+        left: 12px;
+        bottom: 40px;
+        z-index: 1000;
+        background: rgb(122, 100, 74);
+        padding: 8px 12px;
+        }
+        #ui {
+        position: relative;
+        right: 12px;
+        bottom: 40px;
+        z-index: 1000;
+        background: antiquewhite;
+        padding: 8px 12px;
+        }/*
+		/* When browser is 800px wide or less */
+
+		@media screen and (max-width: 800px) {
+			.first-column,
+			.column {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<!--The title shown on the page-->
+		<h1>New England Railroad Maps of the 1880s</h1>
+		<br>
+		<!-- The map -->
+		
+		<h2>Introduction</h2>
+
+		<!-- Metadata about the project -->
+		<p>A map is a representation, and has a purpose, a point of view, and an artistic style. The cartographer makes choices, using projections, line weights, and fonts to convey a message, tell us what is important. Some elements are emphasized, others occluded or omitted. As historic documents, maps can inspire questions or provide evidence of trends. Let’s take a close look at some railroad maps of the 1880s, from the Norman B. Leventhal Map Center, to see what they reveal about an important part of the landscape of the era.
+    
+<section>
+        <div class="row">
+			<div class="first-column">
+        <h2>Boston, Concord, Montreal & White Mountains Railroad</h2> 
+		
+		<div id='iiif-map'></div>
+        <div id="current-view">
+            Current bounds:<br />
+            <div id="current-bounds"></div>
+            </div>
+            <div id="ui">
+            <button id="zoom-to-mntns">Zoom to White Mountains</button>
+            </div>
+			<br>
+			<br>
+    		</div>
+        <div class="column">
+    <br>
+    <p>
+	<p class="p3">Railroads and Development</p3>
+    </p>
+    <p>In the latter half of the 19th century, railroads grew rapidly, driven by and driving industrial development. They brought resources and products to markets. 
+    </p>
+    <p>Tourism also was important. An appreciation for nature arose in response to the impacts of industrialization, and a growing middle class embraced travel to the lakes and mountains of New England.
+    </p>
+	<p>Among the competition, how did particular railroads distinguish themselves? This 1882 map of the Boston, Concord, Montreal & White Mountains Railroad gave extra space on the map to the prime vacation destination of the White Mountains through an unusual distortion – New Hampshire is stretched in height and width.
+	</p>
+    </div>
+</section>
+<section>
+	<div class="row">
+		<div class="first-column">
+		<br>
+	<div id='iiif-map2'></div>
+	
+		</div>
+	<div class="column">
+	<p class ="p3">A Tourism Focus</p3>
+    </p>
+    <p>The map as a whole is fairly plain, almost utilitarian, rendered in black and white. But the area of the White Mountains has been expanded to give room for elaborate hachuring of a large number of individual peaks as well as several ridges and other indications of the mountainous topography. The peaks aren’t topographically accurate, but many are labeled. Specific tourist destinations and resorts are called out, such as Profile House, Fabyan House, and the Mt. Washington Railway, along with popular lakes.
+	</p>
+	<p>It was common in this era for businesses to pay to be featured on maps, which may be one explanation for the variety of font sizes and weights used for resort and hotel names. It’s clear, however, that the railroad wanted customers to know it served these tourist destinations.
+	</p>		   
+		  <br>
+			<hr> 
+	<div>
+        <div class ="row:after">
+            
+    
+						   
+			</div>
+		</div>
+
+		
+	</section>
+    <script
+        src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""
+        ></script>
+        <!-- make sure to import Leaflet-IIIF *after* the main Leaflet package above -->
+        <script src="https://cdn.rawgit.com/mejackreed/Leaflet-IIIF/v3.0.0/leaflet-iiif.js"></script>
+        <script>
+           const map = L.map("iiif-map", {
+        center: [0, 0],
+        crs: L.CRS.Simple,
+        zoom: 0,
+        });
+        const BostonConcord = new L.tileLayer.iiif(
+        "https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:cj82kp247/info.json"
+        ).addTo(map); 
+            const map2 = L.map("iiif-map2", {
+        center: [0, 0],
+        crs: L.CRS.Simple,
+        zoom: 0,
+        });
+        const BCZoom = new L.tileLayer.iiif(
+        "https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:cj82kp247/info.json"
+        ).addTo(map2); 
+        // custom JS code here
+        /*map2.on("moveend", () => {
+        // returns 'southwest_lng,southwest_lat,northeast_lng,northeast_lat' of current view
+        const currentBounds = map.getBounds().toBBoxString();
+        // output current bounds to screen
+        document.getElementById("current-bounds").innerText = currentBounds;
+        });
+        document
+        .getElementById("zoom-to-mntns")
+        .addEventListener("click", () => {
+        map2.flyToBounds([
+        [-580, 225],
+        [-300, 540],
+        ]);
+        });*/
+        </script>
+	
+</body>
+
+</html>
