@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>New England Railroad Maps of the Victorian Era</title>
+<meta charset="utf-8" />
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""
+/>
+<style>
+body {
+margin: 6px;
+padding: 0;
+background-color: rgb(226,206,173);
+}
+
+#iiif-map {
+position: absolute;
+width: 50%;
+top: 60px;
+bottom: 0;
+margin: auto;
+border: 2px solid #92A497;
+}
+
+#current-view {
+position: absolute;
+right: 12px;
+bottom: 12px;
+z-index: 1000;
+background: rgb(122, 100, 74);
+padding: 8px 12px;
+}
+
+#ui {
+position: absolute;
+right: 12px;
+bottom: 40px;
+z-index: 1000;
+background: antiquewhite;
+padding: 8px 12px;
+}
+
+</style>
+</head>
+<body>
+   <h1>New England Railroad Maps of the Victorian Era</h1>
+<div id="iiif-map"></div>
+<div id="current-view">
+    Current bounds:<br />
+    <div id="current-bounds"></div>
+    </div>
+    <div id="ui">
+    <button id="zoom-to-mntns">Zoom in on the White Mountains</button>
+    </div>
+
+<script
+src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""
+></script>
+<!-- make sure to import Leaflet-IIIF *after* the main Leaflet package above -->
+<script src="https://cdn.rawgit.com/mejackreed/Leaflet-IIIF/v3.0.0/leaflet-iiif.js"></script>
+<script>
+   const map = L.map("iiif-map", {
+center: [0, 0],
+crs: L.CRS.Simple,
+zoom: 0,
+});
+const BostonConcord = new L.tileLayer.iiif(
+"https://iiif.digitalcommonwealth.org/iiif/2/commonwealth:cj82kp247/info.json"
+).addTo(map); 
+// custom JS code here
+map.on("moveend", () => {
+// returns 'southwest_lng,southwest_lat,northeast_lng,northeast_lat' of current view
+const currentBounds = map.getBounds().toBBoxString();
+// output current bounds to screen
+document.getElementById("current-bounds").innerText = currentBounds;
+});
+document
+.getElementById("zoom-to-mntns")
+.addEventListener("click", () => {
+map.flyToBounds([
+[-580, 225],
+[-300, 540],
+]);
+});
+</script>
+</body>
+</html>
